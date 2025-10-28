@@ -24,8 +24,9 @@ const ListEvents = () => {
     useEffect(()=>{
         fetchEvent()
     },[page])
-    const Next=()=>{
+    const next=()=>{
         setPage((p) => p+ numberLimit)
+
         // if (eventsOffset === 1){
         //     setEventsOffset(eventsOffset +1)
         // }
@@ -41,11 +42,21 @@ const ListEvents = () => {
     //   setEventsOffset(eventsOffset +1)
     }
 
+    const prev = () => {
+        if(page >0){
+            setPage((p) => p - numberLimit)
+        }
+    }
+
   return (
-    <div>
+      <div>
         
         {events.map((event)=>{return <CardEvent key={event.id} event={event}/>})}
-        <button onClick={()=>Next()}>page suivante</button>
+        <button style={{display : page === 0 ? "none" : "inline-block"}}onClick={()=>prev()}>page précedente</button>
+        <button onClick={()=>next()}>page suivante</button>
+        
+
+
 
         
 
