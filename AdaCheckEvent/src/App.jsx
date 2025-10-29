@@ -1,6 +1,7 @@
 
 import './App.css'
 import ListEvents from './ListEvents'
+import SearchBar from './SearchBar'
 
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
 
   return (
     <>
+    
     <ListEvents />
     </>
   )
