@@ -1,14 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const CardEvent = ({event}) => {
+
+const [showMore , setShowMore] = useState(false)
+
+const full = (event.description).replace(/<[^>]*>/g, '')
+const isLong = full.length >100
+const short = isLong ? full.slice(0,100) + "..." : full
   return (
     <div>
         <h1>{event.title}</h1>
-        <p>{event.lead_text.slice(0,100)+'...'}</p>
+
+        <p>{showMore ? full : short}</p>
+
+        {isLong && (
+        <button onClick={() => setShowMore((v) => !v)}>
+          {showMore ? "Voir moins" : "Voir plus"}
+        </button>
+        )}
+
         <img src={event.cover_url} alt="image" />
-        <a href={event.contact_url}>see more</a>
+
     </div>
   )
 }
 
 export default CardEvent
+
+
