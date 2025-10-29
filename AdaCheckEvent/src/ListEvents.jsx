@@ -10,14 +10,25 @@ const ListEvents = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [filteredEvents, setFilteredEvents] = useState([]);
-
-  const numberLimit = 5;
+  const [allEvents,setAllEvents]=useState([])
+console.log("allEvents",allEvents)
+  const numberLimit = 100;
   // let l = 1
   // console.log(l , "L")
   console.log(number, "number");
   console.log("event", events);
   console.log("page", page);
 
+const fetchFiltred= async()=>{
+    const res = await fetch(
+        `https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/que-faire-a-paris-/records?limit=${numberLimit}`
+      );
+      const data = await res.json();
+
+      console.log(data.results);
+      // setEventsOffset([])
+      setAllEvents(data.results);
+}
   // fonction qui récupère les événements depuis l’API et les enregistre dans le cache
 
   const fetchEvent = async (cache) => {
@@ -68,7 +79,11 @@ const ListEvents = () => {
     console.log("🆕 Aucune donnée dans le cache, on va fetch la page :", page);
 
     fetchEvent(cache);
+    
   }, [page]);
+  useEffect(() => {
+  fetchFiltred() // remplit allEvents une fois
+}, [])
   const next = () => {
     setPage((p) => p + numberLimit);
 
@@ -96,8 +111,7 @@ const ListEvents = () => {
   return (
     <div>
       <SearchBar
-        events={events}
-        setEvents={setEvents}
+        allEvents={allEvents}
         setFilteredEvents={setFilteredEvents}
         setPage={setPage}
       />
