@@ -151,7 +151,7 @@ const visibleEvents =
       >
         page précedente
       </button>
-      <button onClick={() => next()}>page suivante</button>
+      <button style={{ display: visibleEvents.length < 100 ? "none" : "inline-block" }} onClick={() => next()}>page suivante</button>
     </div>
   );
 };

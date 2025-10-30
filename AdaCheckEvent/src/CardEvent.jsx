@@ -4,8 +4,8 @@ const CardEvent = ({event}) => {
 
 const [showMore , setShowMore] = useState(false)
 
-const full = (event.description).replace(/<[^>]*>/g, '')
-const isLong = full.length >100
+const full = event.description?.replace(/<[^>]*>/g, '')
+const isLong = full?.length >100
 const short = isLong ? full.slice(0,100) + "..." : full
   return (
     <div>
