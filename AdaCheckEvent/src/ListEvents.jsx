@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CardEvent from "./CardEvent";
 import SearchBar from "./SearchBar";
+import FetchZipCode from "./FetchZipCode";
 
 const ListEvents = () => {
   // états principaux : événements, pagination, cache et chargement
@@ -11,7 +12,10 @@ const ListEvents = () => {
   const [loading, setLoading] = useState(false);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [allEvents,setAllEvents]=useState([])
+  const [zipCode, setZipCode]= useState([])
+  const [zipCodeSelected, setZipCodeSelected]= useState("all")
 console.log("allEvents",allEvents)
+console.log("dhdhdh",zipCode)
   const numberLimit = 100;
   // let l = 1
   // console.log(l , "L")
@@ -28,7 +32,28 @@ const fetchFiltred= async()=>{
       console.log(data.results);
       // setEventsOffset([])
       setAllEvents(data.results);
+
+      let zipUniq = [...new Set(data.results.map(z=>z.address_zipcode ?? z.address_zipCode))]
+      zipUniq =zipUniq.filter(x => x!== null)
+
+      zipUniq = zipUniq.sort((a, b) => {
+        if (a === 'all') return -1
+        if (b === 'all') return 1
+        return Number(a) - Number(b)
+        })
+      setZipCode(["all",...zipUniq])
 }
+
+//const fltredZipCode = zipCodeSelected === "all" ? allEvents: allEvents.filter(event=> event.address_zipCode=zipCodeSelected)
+const visibleEvents =
+  filteredEvents.length > 0
+    ? filteredEvents
+    : zipCodeSelected === "all"
+    ? allEvents
+    : allEvents.filter(
+        (event) =>
+          (event.address_zipcode ?? event.address_zipCode) === zipCodeSelected
+      )
   // fonction qui récupère les événements depuis l’API et les enregistre dans le cache
 
   const fetchEvent = async (cache) => {
@@ -115,7 +140,8 @@ const fetchFiltred= async()=>{
         setFilteredEvents={setFilteredEvents}
         setPage={setPage}
       />
-      {(filteredEvents.length > 0 ? filteredEvents : events).map((event) => (
+      <FetchZipCode zipCodeSelected={zipCodeSelected} setZipCodeSelected={setZipCodeSelected} zipCode={zipCode} />
+      {visibleEvents.map((event) => (
         <CardEvent key={event.id} event={event}  />
       ))}
       
