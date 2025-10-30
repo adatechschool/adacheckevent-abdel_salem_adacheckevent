@@ -34,7 +34,7 @@ const fetchFiltred= async()=>{
       setAllEvents(data.results);
 
       let zipUniq = [...new Set(data.results.map(z=>z.address_zipcode ?? z.address_zipCode))]
-      zipUniq =zipUniq.filter(x => x!== null)
+      zipUniq =zipUniq.filter(x => x!== undefined)
 
       zipUniq = zipUniq.sort((a, b) => {
         if (a === 'all') return -1
