@@ -13,7 +13,7 @@ const ListEvents = () => {
   const [zipCodeSelected, setZipCodeSelected] = useState("all");
   const [error, setError] = useState(null);
 
-  const limit = 20; // max 100
+  const limit = 100
 
   // ⭐ Favoris (stockés dans localStorage)
   const [favorites, setFavorites] = useState(() => {
@@ -97,7 +97,7 @@ const ListEvents = () => {
   // 🔁 Recharge à chaque changement de recherche ou d’offset
   useEffect(() => {
     loadData(searchText);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, [searchText, offset]);
 
   // 🔽 Filtrage local par code postal

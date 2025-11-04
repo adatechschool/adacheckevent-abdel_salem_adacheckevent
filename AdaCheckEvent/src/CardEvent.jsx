@@ -10,15 +10,14 @@ const CardEvent = ({ event, isFavorite, onToggleFavorite }) => {
 
   const imgSrc =
     event.cover_url ||
-    event.cover ||
-    "https://images.unsplash.com/photo-1504805572947-34fad45aed93?q=80&w=800&auto=format&fit=crop";
+    event.cover ;
 
   return (
     <div className="mb-4 max-w-md rounded-xl border border-black bg-white p-4 shadow-sm">
       <div className="mt-2">
         <img
           src={imgSrc}
-          alt={event.title || "Image événement"}
+          alt={event.title }
           className="h-48 w-full rounded-lg object-cover"
         />
       </div>

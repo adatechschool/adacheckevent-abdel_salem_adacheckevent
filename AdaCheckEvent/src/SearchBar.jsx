@@ -9,7 +9,7 @@ const SearchBar = ({ onSearchChange }) => {
 
   const handleSearch = () => {
     onSearchChange(input); // envoie la recherche au parent
-    setInput(""); // vide la barre après clic
+    setInput("");
   };
 
   const handleKeyPress = (e) => {
