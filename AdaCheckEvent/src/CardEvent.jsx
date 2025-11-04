@@ -54,6 +54,16 @@ const CardEvent = ({ event, isFavorite, onToggleFavorite }) => {
         >
           {isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
         </button>
+        {event.url && (
+          <a
+            href={event.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-md border border-pink-400 bg-pink-500 px-3 py-1 text-sm font-semibold text-white transition hover:bg-pink-600"
+          >
+            Voir l’événement →
+          </a>
+        )}
       </div>
 
       
