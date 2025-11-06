@@ -19,7 +19,7 @@ const SearchBar = ({ onSearchChange }) => {
   };
 
   return (
-    <div className="my-4 flex w-full max-w-xl items-center justify-center gap-3 rounded-xl border border-pink-200 bg-pink-50 px-4 py-3 shadow-sm transition hover:shadow-md">
+    <div className="my-4 flex w-full max-w-xl items-center justify-center gap-3 rounded-xl border border-pink-200 bg-pink-50 px-4 py-3 shadow-sm transition hover:shadow-md ">
       <input
         type="text"
         placeholder="Rechercher un événement (ex : concert, brocante...)"

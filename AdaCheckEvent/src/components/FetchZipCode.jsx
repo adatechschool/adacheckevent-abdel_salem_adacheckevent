@@ -5,7 +5,7 @@ const FetchZipCode = ({ zipCodeSelected, setZipCodeSelected, zipCode }) => {
     <div className="my-4 flex w-full max-w-xl flex-col items-center gap-2 text-center">
       <label
         htmlFor="zipcode"
-        className="text-base font-semibold text-pink-700"
+        className="text-base font-semibold text-pink-700 dark:text-white"
       >
         Choisissez votre arrondissement :
       </label>
@@ -20,10 +20,10 @@ const FetchZipCode = ({ zipCodeSelected, setZipCodeSelected, zipCode }) => {
           <option
             key={zip}
             value={zip}
-            className="text-black text-center"
+            className="text-black text-center "
           >
-            {zip}
-          </option>
+            {zip }
+          </option >
         ))}
       </select>
     </div>

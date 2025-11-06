@@ -1,17 +1,18 @@
-
 import './App.css'
-import ListEvents from './ListEvents'
-import SearchBar from './SearchBar'
+import ListEvents from './components/ListEvents'
+import Background  from './components/Background'
 
 
 function App() {
   
 
   return (
-    <>
-    
-    <ListEvents />
-    </>
+
+<div className="relative min-h-screen z-10">
+  <Background/>
+  <ListEvents />
+</div>
+
   )
 }
 

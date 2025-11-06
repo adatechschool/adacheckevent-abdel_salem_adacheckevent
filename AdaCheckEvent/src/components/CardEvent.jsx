@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ButtonSwitch from "./ButtonSwitch";
 
 const CardEvent = ({ event, isFavorite, onToggleFavorite }) => {
   const [showMore, setShowMore] = useState(false);
@@ -13,7 +14,8 @@ const CardEvent = ({ event, isFavorite, onToggleFavorite }) => {
     event.cover ;
 
   return (
-    <div className="mb-4 max-w-md rounded-xl border border-black bg-white p-4 shadow-sm">
+    <div className="mb-4 max-w-md rounded-xl border border-black bg-white p-4 shadow-sm   dark:border-zinc-700 dark:bg-zinc-900 
+ ">
       <div className="mt-2">
         <img
           src={imgSrc}
@@ -21,16 +23,16 @@ const CardEvent = ({ event, isFavorite, onToggleFavorite }) => {
           className="h-48 w-full rounded-lg object-cover"
         />
       </div>
-      <h2 className="mb-2 text-lg font-semibold text-black">
+      <h2 className="mb-2 text-lg font-semibold text-black dark:text-white">
         {event.title || "Sans titre"}
         {isFavorite && <span className="ml-2 text-yellow-400">★</span>}
       </h2>
 
-      <p className="mb-1 text-sm text-black/70">
+      <p className="mb-1 text-sm text-black/70 dark:text-white">
         {event.address_zipcode ?? event.address_zipCode ?? "Code postal inconnu"}
       </p>
 
-      <p className="mb-3 text-sm text-black">
+      <p className="mb-3 text-sm text-black dark:text-white">
         {showMore ? full : short}
       </p>
 
@@ -44,16 +46,19 @@ const CardEvent = ({ event, isFavorite, onToggleFavorite }) => {
           </button>
         )}
 
-        <button
-          onClick={() => onToggleFavorite(event.id)}
-          className={`rounded-lg border px-3 py-1 text-sm font-medium ${
-            isFavorite
-              ? "border-pink-500 bg-pink-100 text-pink-700 hover:bg-pink-200"
-              : "border-black bg-white text-black hover:bg-pink-100"
-          }`}
-        >
-          {isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
-        </button>
+
+<ButtonSwitch
+  checked={isFavorite}
+  onChange={() => onToggleFavorite(event.id)}
+  uncheckedLabel="Ajouter aux favoris"
+  checkedLabel="Retirer des favoris"
+/>
+
+
+
+
+
+
         {event.url && (
           <a
             href={event.url}
@@ -72,3 +77,17 @@ const CardEvent = ({ event, isFavorite, onToggleFavorite }) => {
 };
 
 export default CardEvent;
+
+
+
+
+//  <button
+// onClick={() => onToggleFavorite(event.id)}
+// className={`rounded-lg border px-3 py-1 text-sm font-medium ${
+//   isFavorite
+//     ? "border-pink-500 bg-pink-100 text-pink-700 hover:bg-pink-200"
+//     : "border-black bg-white text-black hover:bg-pink-100"
+// }`}
+// >
+// {isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
+// </button> 

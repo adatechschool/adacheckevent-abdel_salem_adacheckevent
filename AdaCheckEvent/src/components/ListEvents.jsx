@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import CardEvent from "./CardEvent";
 import SearchBar from "./SearchBar";
 import FetchZipCode from "./FetchZipCode";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { ThemeToggle } from "./ThemToggle";
+import '../App.css'
+
+
+
 
 const ListEvents = () => {
   // États principaux
@@ -13,17 +19,18 @@ const ListEvents = () => {
   const [zipCodeSelected, setZipCodeSelected] = useState("all");
   const [error, setError] = useState(null);
 
-  const limit = 100
+  const limit = 20
 
   // ⭐ Favoris (stockés dans localStorage)
-  const [favorites, setFavorites] = useState(() => {
-    try {
-      const raw = localStorage.getItem("paris-events:favorites");
-      return raw ? JSON.parse(raw) : [];
-    } catch {
-      return [];
-    }
-  });
+  const [favorites, setFavorites] = useLocalStorage("paris-events:favorites", [])
+  //  useState(() => {
+  //   try {
+  //     const raw = localStorage.getItem("paris-events:favorites");
+  //     return raw ? JSON.parse(raw) : [];
+  //   } catch {
+  //     return [];
+  //   }
+  // });
 
   const saveFavorites = (next) => {
     setFavorites(next);
@@ -120,11 +127,13 @@ const ListEvents = () => {
   
 
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-5xl flex-col items-center bg-white px-4 py-6 text-black">
-      <h1 className="mb-4 text-center text-2xl font-bold text-pink-600">
+    <div className="mx-auto flex min-h-screen w-full max-w-5xl flex-col items-center  px-4 py-6 text-black">
+      <div className="flex justify-center space-x-15 items-center mb-10 px-35 width-full">
+      <h1 className="text-center text-2xl font-bold text-pink-600 dark:text-white">
         🎭 Événements à Paris
       </h1>
-
+      <ThemeToggle className="" ></ThemeToggle>
+      </div>
       <SearchBar onSearchChange={handleSearch} />
 
       <FetchZipCode
@@ -132,6 +141,7 @@ const ListEvents = () => {
         setZipCodeSelected={setZipCodeSelected}
         zipCode={zipCodeList}
       />
+
 
       {isLoading && (
         <p className="mt-4 text-sm text-pink-600 animate-pulse">
@@ -172,7 +182,7 @@ const ListEvents = () => {
         </button>
       </div>
     </div>
+
   );
 };
-
 export default ListEvents;
