@@ -20,7 +20,7 @@ const ListEvents = () => {
   const [zipCodeSelected, setZipCodeSelected] = useState("all");
   const [error, setError] = useState(null);
 
-  const limit = 20
+  const limit = 100
 
   // ⭐ Favoris (stockés dans localStorage)
   const [favorites, setFavorites] = useLocalStorage("paris-events:favorites", [])
