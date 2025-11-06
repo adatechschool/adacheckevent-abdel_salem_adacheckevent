@@ -5,8 +5,9 @@ import FetchZipCode from "./FetchZipCode";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { ThemeToggle } from "./ThemToggle";
 import '../App.css'
+const BASE_URL = import.meta.env.VITE_PARIS_API_URL;
 
-
+console.log("BASE_URL =>", BASE_URL);
 
 
 const ListEvents = () => {
@@ -60,7 +61,8 @@ const ListEvents = () => {
     setIsLoading(true);
     setError(null);
 
-    let url = `https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/que-faire-a-paris-/records?offset=${offset}&limit=${limit}`;
+    
+    let url = `${BASE_URL}?offset=${offset}&limit=${limit}`;
 
     // 🔎 Si au moins 3 lettres → recherche côté API
     if (query.trim().length >= 3) {
